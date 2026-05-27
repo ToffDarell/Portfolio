@@ -1,156 +1,275 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { ExternalLink } from 'lucide-react'; import { FaGithub, FaFigma } from 'react-icons/fa';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ExternalLink, Calendar, Code, FileText, Zap, BookOpen, DollarSign, Eye, ShoppingBag, Users, Grid, Orbit } from 'lucide-react';
+import { FaGithub, FaFigma } from 'react-icons/fa';
+import RadialOrbitalTimeline from './ui/radial-orbital-timeline';
 
 const PROJECTS = [
   {
+    id: 1,
     title: 'Homeroom Management System',
     desc: 'Student and classroom management system built with robust data structures and file handling.',
     tech: ['C Language'],
     color: '#A8B9CC',
     image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80',
     link: 'https://github.com/ToffDarell/Homeroom-Management-System',
+    date: 'Jan 2023',
+    category: 'System',
+    icon: FileText,
+    relatedIds: [8],
+    status: 'completed',
+    energy: 60,
   },
   {
+    id: 2,
     title: 'Blackout Esports Reservation System',
     desc: 'Computer reservation system with QR-based bookings and integrated payment features for an esports lounge.',
     tech: ['PHP', 'MySQL', 'JavaScript'],
     color: '#F7DF1E',
     image: '/projects/blackout.png',
-    link: 'https://github.com/ToffDarell/BLACKOUTESPORTS'
+    link: 'https://github.com/ToffDarell/BLACKOUTESPORTS',
+    date: 'Apr 2023',
+    category: 'Web App',
+    icon: Calendar,
+    relatedIds: [5, 7],
+    status: 'completed',
+    energy: 75,
   },
   {
+    id: 3,
     title: 'Malaybalay Skyfall',
     desc: 'An exciting dodging bird game developed completely in Java featuring custom graphics and mechanics.',
     tech: ['Java'],
     color: '#007396',
     image: '/projects/skyfall.png',
     link: 'https://github.com/ToffDarell/DODGING-BIRD-GAME',
+    date: 'Jul 2023',
+    category: 'Game',
+    icon: Zap,
+    relatedIds: [],
+    status: 'completed',
+    energy: 85,
   },
   {
+    id: 4,
     title: 'CPAG Research Archive',
     desc: 'MERN stack academic archive and monitoring platform for masteral research documents and progress tracking.',
     tech: ['MongoDB', 'Express', 'React', 'Node.js'],
     color: '#47A248',
     image: '/projects/cpag.png',
     link: 'https://github.com/ToffDarell/CPAG-Graduates-Research-Monitoring-System',
+    date: 'Oct 2023',
+    category: 'Archive',
+    icon: BookOpen,
+    relatedIds: [5, 8],
+    status: 'completed',
+    energy: 90,
   },
   {
+    id: 5,
     title: 'PayMonitor Lending SaaS',
     desc: 'Multi-tenant lending and payment monitoring SaaS platform for cooperatives and small lending institutions.',
     tech: ['Laravel', 'MySQL', 'Tailwind', 'Alpine.js'],
     color: '#FF2D20',
     image: '/projects/paymonitor.png',
     link: 'https://github.com/ToffDarell/PayMonitor-',
+    date: 'Jan 2024',
+    category: 'SaaS',
+    icon: DollarSign,
+    relatedIds: [2, 4],
+    status: 'completed',
+    energy: 100,
   },
   {
+    id: 6,
     title: 'SafeRide Helmet Detection',
     desc: 'AI-powered helmet detection and license plate recognition system using YOLO and computer vision.',
     tech: ['YOLO', 'Python', 'OpenCV', 'PyTorch'],
     color: '#EE4C2C',
     image: '/projects/saferide.png',
     link: 'https://github.com/ToffDarell/SAFERIDEWEB',
+    date: 'Mar 2024',
+    category: 'AI / CV',
+    icon: Eye,
+    relatedIds: [],
+    status: 'completed',
+    energy: 95,
   },
   {
+    id: 7,
     title: 'Mugna Arts E-Commerce',
     desc: 'Modern e-commerce platform for leather products and handcrafted items with a premium shopping experience.',
     tech: ['Laravel', 'React', 'Tailwind CSS'],
     color: '#F24E1E',
     image: '/projects/mugna.png',
     link: 'https://github.com/ToffDarell/-Mugna-Leather-Arts',
+    date: 'May 2024',
+    category: 'E-Commerce',
+    icon: ShoppingBag,
+    relatedIds: [2],
+    status: 'in-progress',
+    energy: 80,
   },
   {
+    id: 8,
     title: 'Smart Barangay Services',
     desc: 'Community-focused digital services and resident management system for local government operations.',
     tech: ['PHP', 'MySQL', 'Alpine.js'],
     color: '#3b82f6',
     image: '/projects/barangay.png',
     link: 'https://github.com/ToffDarell/Barangay-Smart-Services',
+    date: 'Jun 2024',
+    category: 'Gov Tech',
+    icon: Users,
+    relatedIds: [1, 4],
+    status: 'in-progress',
+    energy: 70,
   },
 ];
 
-const Projects = () => (
-  <section className="py-24 relative" id="projects">
-    <div className="absolute left-0 top-1/2 w-96 h-96 rounded-full pointer-events-none -translate-y-1/2"
-         style={{ background: 'var(--primary-glow)', filter: 'blur(100px)' }}></div>
+// Map PROJECTS to TimelineItem interface
+const timelineData = PROJECTS.map(p => ({
+  id: p.id,
+  title: p.title,
+  date: p.date,
+  content: p.desc,
+  category: p.category,
+  icon: p.icon,
+  relatedIds: p.relatedIds,
+  status: p.status,
+  energy: p.energy,
+}));
 
-    <div className="text-center mb-16">
-      <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
-        className="text-sm font-semibold tracking-widest uppercase mb-3 text-primary-custom">
-        What I've built
-      </motion.p>
-      <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-        className="text-4xl md:text-5xl font-extrabold text-text-custom">
-        Featured <span className="text-gradient">Projects</span>
-      </motion.h2>
-    </div>
+const Projects = () => {
+  const [viewMode, setViewMode] = useState('grid'); // 'grid' or 'orbital'
 
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {PROJECTS.map((p, i) => (
-        <motion.div
-          key={i}
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-80px' }}
-          transition={{ delay: (i % 3) * 0.1, duration: 0.5 }}
-          className="group flex flex-col rounded-2xl overflow-hidden relative cursor-pointer"
-          style={{
-            background: 'var(--glass-bg)',
-            border: '1px solid var(--glass-border)',
-            backdropFilter: 'blur(20px)',
-            transition: 'border-color 0.3s, box-shadow 0.3s, transform 0.3s',
-          }}
-          whileHover={{
-            y: -8,
-            boxShadow: `0 20px 40px ${p.color}15`,
-            transition: { duration: 0.3 },
-          }}
-        >
-          {/* Gradient border top strip */}
-          <div className="h-[2px] w-full" style={{ background: `linear-gradient(90deg, ${p.color}, transparent)` }}></div>
+  return (
+    <section className="py-24 relative" id="projects">
+      <div className="absolute left-0 top-1/2 w-96 h-96 rounded-full pointer-events-none -translate-y-1/2"
+           style={{ background: 'var(--primary-glow)', filter: 'blur(100px)' }}></div>
 
-          {/* Image */}
-          <div className="relative h-44 overflow-hidden">
-            <div className="absolute inset-0 z-10 transition-opacity duration-300 bg-black/35"></div>
-            <img
-              src={p.image}
-              alt={p.title}
-              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-            />
-            {/* Action buttons on hover */}
-            <div className="absolute inset-0 z-20 flex items-center justify-center gap-3 opacity-0 group-hover:opacity-100 transition-all duration-300">
-              <motion.a href={p.link} target="_blank" rel="noopener noreferrer" whileHover={{ scale: 1.1 }}
-                className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold text-white cursor-pointer"
-                style={{ background: 'rgba(0,0,0,0.7)', backdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.2)' }}>
-                <FaGithub className="w-4 h-4" /> Code
-              </motion.a>
-              <motion.a href="#" whileHover={{ scale: 1.1 }}
-                className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold text-white cursor-pointer"
-                style={{ background: p.color, boxShadow: `0 0 20px ${p.color}60` }}>
-                <ExternalLink className="w-4 h-4" /> Demo
-              </motion.a>
-            </div>
-          </div>
+      <div className="text-center mb-16 relative z-10">
+        <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
+          className="text-sm font-semibold tracking-widest uppercase mb-3 text-primary-custom">
+          What I've built
+        </motion.p>
+        <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+          className="text-4xl md:text-5xl font-extrabold text-text-custom mb-8">
+          Featured <span className="text-gradient">Projects</span>
+        </motion.h2>
 
-          {/* Content */}
-          <div className="p-5 flex flex-col flex-grow">
-            <h3 className="text-base font-bold text-text-custom mb-2 group-hover:text-primary-custom transition-colors">
-              {p.title}
-            </h3>
-            <p className="text-sm text-text-muted-custom leading-relaxed flex-grow mb-4">{p.desc}</p>
-            <div className="flex flex-wrap gap-1.5 mt-auto">
-              {p.tech.map((t, j) => (
-                <span key={j} className="text-xs px-2.5 py-1 rounded-full font-medium"
-                      style={{ background: `${p.color}15`, color: p.color, border: `1px solid ${p.color}30` }}>
-                  {t}
-                </span>
+        {/* View Toggle */}
+        <div className="flex items-center justify-center gap-2 mb-8">
+          <button
+            onClick={() => setViewMode('grid')}
+            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold transition-all ${
+              viewMode === 'grid' 
+                ? 'bg-primary-custom text-white shadow-[0_0_20px_rgba(37,99,235,0.4)]' 
+                : 'bg-transparent text-text-muted-custom hover:text-text-custom glass'
+            }`}
+          >
+            <Grid className="w-4 h-4" /> Grid View
+          </button>
+          <button
+            onClick={() => setViewMode('orbital')}
+            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold transition-all ${
+              viewMode === 'orbital' 
+                ? 'bg-primary-custom text-white shadow-[0_0_20px_rgba(37,99,235,0.4)]' 
+                : 'bg-transparent text-text-muted-custom hover:text-text-custom glass'
+            }`}
+          >
+            <Orbit className="w-4 h-4" /> Orbital View
+          </button>
+        </div>
+      </div>
+
+      <div className="min-h-[600px] relative">
+        <AnimatePresence mode="wait">
+          {viewMode === 'grid' ? (
+            <motion.div 
+              key="grid"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.3 }}
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 relative z-10"
+            >
+              {PROJECTS.map((p, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-80px' }}
+                  transition={{ delay: (i % 3) * 0.1, duration: 0.5 }}
+                  className="group flex flex-col rounded-2xl overflow-hidden relative cursor-pointer"
+                  style={{
+                    background: 'var(--glass-bg)',
+                    border: '1px solid var(--glass-border)',
+                    backdropFilter: 'blur(20px)',
+                    transition: 'border-color 0.3s, box-shadow 0.3s, transform 0.3s',
+                  }}
+                  whileHover={{
+                    y: -8,
+                    boxShadow: `0 20px 40px ${p.color}15`,
+                    transition: { duration: 0.3 },
+                  }}
+                >
+                  <div className="h-[2px] w-full" style={{ background: `linear-gradient(90deg, ${p.color}, transparent)` }}></div>
+
+                  <div className="relative h-44 overflow-hidden">
+                    <div className="absolute inset-0 z-10 transition-opacity duration-300 bg-black/35"></div>
+                    <img
+                      src={p.image}
+                      alt={p.title}
+                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 z-20 flex items-center justify-center gap-3 opacity-0 group-hover:opacity-100 transition-all duration-300">
+                      <motion.a href={p.link} target="_blank" rel="noopener noreferrer" whileHover={{ scale: 1.1 }}
+                        className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold text-white cursor-pointer"
+                        style={{ background: 'rgba(0,0,0,0.7)', backdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.2)' }}>
+                        <FaGithub className="w-4 h-4" /> Code
+                      </motion.a>
+                      <motion.a href="#" whileHover={{ scale: 1.1 }}
+                        className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold text-white cursor-pointer"
+                        style={{ background: p.color, boxShadow: `0 0 20px ${p.color}60` }}>
+                        <ExternalLink className="w-4 h-4" /> Demo
+                      </motion.a>
+                    </div>
+                  </div>
+
+                  <div className="p-5 flex flex-col flex-grow">
+                    <h3 className="text-base font-bold text-text-custom mb-2 group-hover:text-primary-custom transition-colors">
+                      {p.title}
+                    </h3>
+                    <p className="text-sm text-text-muted-custom leading-relaxed flex-grow mb-4">{p.desc}</p>
+                    <div className="flex flex-wrap gap-1.5 mt-auto">
+                      {p.tech.map((t, j) => (
+                        <span key={j} className="text-xs px-2.5 py-1 rounded-full font-medium"
+                              style={{ background: `${p.color}15`, color: p.color, border: `1px solid ${p.color}30` }}>
+                          {t}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </motion.div>
               ))}
-            </div>
-          </div>
-        </motion.div>
-      ))}
-    </div>
-  </section>
-);
+            </motion.div>
+          ) : (
+            <motion.div
+              key="orbital"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.3 }}
+              className="w-full bg-black/5 rounded-3xl overflow-hidden glass border border-white/10 relative z-0"
+            >
+              <RadialOrbitalTimeline timelineData={timelineData} />
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    </section>
+  );
+};
 
 export default Projects;
