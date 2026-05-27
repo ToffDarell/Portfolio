@@ -22,3 +22,24 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Environment variables
+.env
+.env.*
+
+# AI Agent skill folders
+.agent/
+.claude/
+.codebuddy/
+.codex/
+.continue/
+.cursor/
+.gemini/
+.github/prompts/
+.kiro/
+.opencode/
+.qoder/
+.roo/
+.trae/
+.windsurf/
+design-system/

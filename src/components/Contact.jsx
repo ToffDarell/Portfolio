@@ -5,14 +5,14 @@ import { FaGithub, FaLinkedin, FaFacebook, FaInstagram } from 'react-icons/fa';
 import emailjs from '@emailjs/browser';
 
 
-const EMAILJS_SERVICE_ID = 'service_917fwkk';
-const EMAILJS_TEMPLATE_ID = 'template_jgois1m';
-const EMAILJS_PUBLIC_KEY = 'Bb2ivm8kgGAUjmffW';
+const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
 
 const Contact = () => {
   const formRef = useRef(null);
-  const [status, setStatus] = useState('idle'); // 'idle' | 'sending' | 'sent' | 'error'
+  const [status, setStatus] = useState('idle');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
