@@ -72,13 +72,8 @@ const Services = () => (
           viewport={{ once: true, margin: '-60px' }}
           transition={{ delay: (i % 3) * 0.1 }}
           whileHover={{ y: -8 }}
-          className="group relative rounded-2xl p-6 flex flex-col gap-4 overflow-hidden cursor-default"
-          style={{
-            background: 'rgba(255,255,255,0.04)',
-            border: '1px solid rgba(255,255,255,0.08)',
-            backdropFilter: 'blur(20px)',
-            transition: 'border-color 0.3s, box-shadow 0.3s',
-          }}
+          className="group relative rounded-2xl p-6 flex flex-col gap-4 overflow-hidden cursor-default glass"
+          style={{ transition: 'border-color 0.3s, box-shadow 0.3s' }}
         >
           {/* Hover glow */}
           <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-2xl"
@@ -101,12 +96,12 @@ const Services = () => (
           </div>
 
           <div>
-            <h3 className="text-lg font-bold text-white mb-2">{s.title}</h3>
-            <p className="text-sm text-gray-400 leading-relaxed">{s.desc}</p>
+            <h3 className="text-lg font-bold text-text-custom mb-2">{s.title}</h3>
+            <p className="text-sm text-text-muted-custom leading-relaxed">{s.desc}</p>
           </div>
 
           {/* Feature tags */}
-          <div className="flex flex-wrap gap-2 mt-auto pt-4" style={{ borderTop: '1px solid rgba(255,255,255,0.05)' }}>
+          <div className="flex flex-wrap gap-2 mt-auto pt-4 border-t border-border-custom/30">
             {s.features.map((f, j) => (
               <span key={j} className="text-xs px-2.5 py-1 rounded-full"
                     style={{ background: `${s.color}15`, color: s.color, border: `1px solid ${s.color}25` }}>
@@ -125,12 +120,12 @@ const Services = () => (
       viewport={{ once: true }}
       className="mt-12 text-center"
     >
-      <p className="text-gray-400 mb-6">Need something custom? Let's talk about your project.</p>
+      <p className="text-text-muted-custom mb-6">Need something custom? Let's talk about your project.</p>
       <motion.a
         href="#contact"
         whileHover={{ scale: 1.05, boxShadow: '0 0 30px rgba(124,58,237,0.5)' }}
         whileTap={{ scale: 0.95 }}
-        className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-semibold text-white"
+        className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-semibold text-text-custom"
         style={{ background: 'linear-gradient(135deg, #7c3aed, #2563eb)' }}
       >
         Start a Project <ArrowRight className="w-4 h-4" />

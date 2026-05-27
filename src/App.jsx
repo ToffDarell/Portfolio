@@ -58,15 +58,19 @@ function App() {
         />
       </div>
 
-      {/* Global gradient blobs for atmosphere */}
-      <div className="fixed top-0 left-0 w-full h-full pointer-events-none z-0 overflow-hidden">
-        <div className="animate-blob absolute top-[-20%] left-[-10%] w-[600px] h-[600px] rounded-full opacity-[0.03] dark:opacity-10 transition-opacity duration-300"
-             style={{ background: 'radial-gradient(circle, #7c3aed, transparent)' }}></div>
-        <div className="animate-blob animation-delay-2000 absolute top-[40%] right-[-10%] w-[500px] h-[500px] rounded-full opacity-[0.03] dark:opacity-10 transition-opacity duration-300"
-             style={{ background: 'radial-gradient(circle, #2563eb, transparent)' }}></div>
-        <div className="animate-blob animation-delay-4000 absolute bottom-[-10%] left-[30%] w-[400px] h-[400px] rounded-full opacity-[0.03] dark:opacity-10 transition-opacity duration-300"
-             style={{ background: 'radial-gradient(circle, #a855f7, transparent)' }}></div>
-      </div>
+      {/* Fixed Cyber Grid Background */}
+      <div 
+        className="fixed inset-0 z-0 pointer-events-none"
+        style={{
+          backgroundImage: `
+            linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px)
+          `,
+          backgroundSize: '40px 40px',
+          maskImage: 'radial-gradient(ellipse at center, black 40%, transparent 80%)',
+          WebkitMaskImage: 'radial-gradient(ellipse at center, black 40%, transparent 80%)'
+        }}
+      ></div>
 
       <Navbar theme={theme} toggleTheme={toggleTheme} />
 

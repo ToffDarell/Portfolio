@@ -90,8 +90,8 @@ const UIUX = () => (
                   Figma Prototype
                 </span>
               </div>
-              <h3 className="text-xl font-extrabold text-white">{d.title}</h3>
-              <p className="text-sm text-gray-300 opacity-0 group-hover:opacity-100 transition-opacity duration-300 mt-1">
+              <h3 className="text-xl font-extrabold text-text-custom">{d.title}</h3>
+              <p className="text-sm text-text-muted-custom opacity-0 group-hover:opacity-100 transition-opacity duration-300 mt-1">
                 {d.subtitle}
               </p>
             </div>
@@ -104,7 +104,7 @@ const UIUX = () => (
               className="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300"
               style={{ background: d.color }}
             >
-              <ExternalLink className="w-4 h-4 text-white" />
+              <ExternalLink className="w-4 h-4 text-text-custom" />
             </motion.a>
           </div>
         </motion.div>

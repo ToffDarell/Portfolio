@@ -35,15 +35,16 @@ const Contact = () => {
   };
 
   const inputStyle = {
-    background: 'rgba(0,0,0,0.3)',
-    border: '1px solid rgba(255,255,255,0.1)',
+    background: 'var(--glass-bg)',
+    border: '1px solid var(--glass-border)',
+    color: 'var(--text-custom)',
   };
   const onFocus = (e) => {
-    e.target.style.borderColor = 'rgba(124,58,237,0.5)';
+    e.target.style.borderColor = 'rgba(124,58,237,0.6)';
     e.target.style.boxShadow = '0 0 0 2px rgba(124,58,237,0.15)';
   };
   const onBlur = (e) => {
-    e.target.style.borderColor = 'rgba(255,255,255,0.1)';
+    e.target.style.borderColor = 'var(--glass-border)';
     e.target.style.boxShadow = 'none';
   };
 
@@ -81,13 +82,10 @@ const Contact = () => {
           transition={{ duration: 0.6 }}
           className="md:col-span-2 flex flex-col gap-5"
         >
-          <div
-            className="rounded-2xl p-6 flex flex-col gap-6"
-            style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', backdropFilter: 'blur(20px)' }}
-          >
+          <div className="rounded-2xl p-6 flex flex-col gap-6 glass">
             <div>
-              <h3 className="text-xl font-extrabold text-white mb-2">Contact Info</h3>
-              <p className="text-sm text-gray-400 leading-relaxed">
+              <h3 className="text-xl font-extrabold text-text-custom mb-2">Contact Info</h3>
+              <p className="text-sm text-text-muted-custom leading-relaxed">
                 Available for freelance, internships, and exciting projects. Let's create something great.
               </p>
             </div>
@@ -102,8 +100,8 @@ const Contact = () => {
                   <Mail className="w-5 h-5" style={{ color: '#a78bfa' }} />
                 </div>
                 <div>
-                  <p className="text-xs text-gray-500 mb-0.5">Email</p>
-                  <p className="text-sm font-semibold text-white group-hover:text-purple-300 transition-colors">topedarell13@gmail.com</p>
+                  <p className="text-xs text-text-muted-custom mb-0.5">Email</p>
+                  <p className="text-sm font-semibold text-text-custom group-hover:text-purple-300 transition-colors">topedarell13@gmail.com</p>
                 </div>
               </a>
 
@@ -112,15 +110,15 @@ const Contact = () => {
                   <MapPin className="w-5 h-5" style={{ color: '#60a5fa' }} />
                 </div>
                 <div>
-                  <p className="text-xs text-gray-500 mb-0.5">Location</p>
-                  <p className="text-sm font-semibold text-white">Philippines 🇵🇭</p>
+                  <p className="text-xs text-text-muted-custom mb-0.5">Location</p>
+                  <p className="text-sm font-semibold text-text-custom">Philippines 🇵🇭</p>
                 </div>
               </div>
             </div>
 
             {/* Socials */}
             <div style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }} className="pt-5">
-              <p className="text-xs text-gray-500 mb-4 uppercase tracking-wider font-semibold">Connect</p>
+              <p className="text-xs text-text-muted-custom mb-4 uppercase tracking-wider font-semibold">Connect</p>
               <div className="flex gap-3">
                 {[
                   { icon: <FaGithub className="w-5 h-5" />, href: 'https://github.com/ToffDarell', label: 'GitHub', color: '#ffffff', bg: 'rgba(255,255,255,0.1)' },
@@ -139,17 +137,6 @@ const Contact = () => {
               </div>
             </div>
           </div>
-
-          {/* Status card */}
-          <div className="rounded-2xl p-5 flex items-center gap-4" style={{ background: 'rgba(5,150,105,0.1)', border: '1px solid rgba(5,150,105,0.25)' }}>
-            <div className="relative w-3 h-3 flex-shrink-0">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75" style={{ background: '#10b981' }} />
-              <span className="relative inline-flex rounded-full h-3 w-3" style={{ background: '#10b981' }} />
-            </div>
-            <p className="text-sm text-gray-300">
-              Currently <span className="font-bold" style={{ color: '#10b981' }}>available</span> for new opportunities
-            </p>
-          </div>
         </motion.div>
 
         {/* Right: Form */}
@@ -160,31 +147,30 @@ const Contact = () => {
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="md:col-span-3 rounded-2xl p-7 flex flex-col gap-5"
-          style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', backdropFilter: 'blur(20px)' }}
+          className="md:col-span-3 rounded-2xl p-7 flex flex-col gap-5 glass"
         >
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
             <div className="flex flex-col gap-2">
-              <label className="text-sm font-medium text-gray-300">Your Name</label>
+              <label className="text-sm font-medium text-text-custom">Your Name</label>
               <input
                 type="text"
                 name="from_name"
                 placeholder="John Doe"
                 required
-                className="w-full px-4 py-3 rounded-xl text-white placeholder-gray-600 text-sm outline-none transition-all duration-300"
+                className="w-full px-4 py-3 rounded-xl text-text-custom placeholder-gray-600 text-sm outline-none transition-all duration-300"
                 style={inputStyle}
                 onFocus={onFocus}
                 onBlur={onBlur}
               />
             </div>
             <div className="flex flex-col gap-2">
-              <label className="text-sm font-medium text-gray-300">Your Email</label>
+              <label className="text-sm font-medium text-text-custom">Your Email</label>
               <input
                 type="email"
                 name="from_email"
                 placeholder="john@example.com"
                 required
-                className="w-full px-4 py-3 rounded-xl text-white placeholder-gray-600 text-sm outline-none transition-all duration-300"
+                className="w-full px-4 py-3 rounded-xl text-text-custom placeholder-gray-600 text-sm outline-none transition-all duration-300"
                 style={inputStyle}
                 onFocus={onFocus}
                 onBlur={onBlur}
@@ -193,12 +179,12 @@ const Contact = () => {
           </div>
 
           <div className="flex flex-col gap-2">
-            <label className="text-sm font-medium text-gray-300">Subject</label>
+            <label className="text-sm font-medium text-text-custom">Subject</label>
             <input
               type="text"
               name="subject"
               placeholder="What's this about?"
-              className="w-full px-4 py-3 rounded-xl text-white placeholder-gray-600 text-sm outline-none transition-all"
+              className="w-full px-4 py-3 rounded-xl text-text-custom placeholder-gray-600 text-sm outline-none transition-all"
               style={inputStyle}
               onFocus={onFocus}
               onBlur={onBlur}
@@ -206,13 +192,13 @@ const Contact = () => {
           </div>
 
           <div className="flex flex-col gap-2">
-            <label className="text-sm font-medium text-gray-300">Message</label>
+            <label className="text-sm font-medium text-text-custom">Message</label>
             <textarea
               rows={5}
               name="message"
               placeholder="Tell me about your project..."
               required
-              className="w-full px-4 py-3 rounded-xl text-white placeholder-gray-600 text-sm outline-none transition-all resize-none"
+              className="w-full px-4 py-3 rounded-xl text-text-custom placeholder-gray-600 text-sm outline-none transition-all resize-none"
               style={inputStyle}
               onFocus={onFocus}
               onBlur={onBlur}
@@ -228,7 +214,7 @@ const Contact = () => {
             disabled={status === 'sending'}
             whileHover={status === 'idle' ? { scale: 1.02, boxShadow: '0 0 30px rgba(124,58,237,0.5)' } : {}}
             whileTap={status === 'idle' ? { scale: 0.98 } : {}}
-            className="w-full py-4 rounded-xl font-bold text-white flex items-center justify-center gap-2 transition-all"
+            className="w-full py-4 rounded-xl font-bold text-text-custom flex items-center justify-center gap-2 transition-all"
             style={{
               background:
                 status === 'sent'    ? 'rgba(5,150,105,0.9)' :

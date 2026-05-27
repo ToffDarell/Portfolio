@@ -37,18 +37,6 @@ const Hero = () => {
         transition={{ duration: 0.9, ease: 'easeOut' }}
         className="w-full lg:w-1/2 flex flex-col items-start space-y-6"
       >
-        {/* Status pill */}
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full"
-             style={{ background: 'var(--primary-glow)', border: '1px solid rgba(124,58,237,0.3)' }}>
-          <span className="relative flex h-2.5 w-2.5">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75"
-                  style={{ background: '#7c3aed' }}></span>
-            <span className="relative inline-flex rounded-full h-2.5 w-2.5" style={{ background: '#7c3aed' }}></span>
-          </span>
-          <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: '#a78bfa' }}>
-            Available for Work
-          </span>
-        </div>
 
         <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-tight text-text-custom">
           Hi, I'm{' '}
@@ -70,9 +58,10 @@ const Hero = () => {
         <div className="flex flex-wrap gap-4 mt-4">
           <motion.a
             href="#projects"
-            whileHover={{ scale: 1.05, boxShadow: '0 0 30px rgba(255,255,255,0.2)' }}
+            whileHover={{ scale: 1.05, boxShadow: '0 0 30px rgba(124,58,237,0.5)' }}
             whileTap={{ scale: 0.95 }}
-            className="flex items-center gap-2 px-8 py-4 rounded-xl font-semibold text-white group transition-all cursor-pointer liquid-glass-btn"
+            className="flex items-center gap-2 px-8 py-4 rounded-xl font-semibold text-white group transition-all cursor-pointer"
+            style={{ background: 'linear-gradient(135deg, #7c3aed, #2563eb)', boxShadow: '0 4px 15px rgba(124,58,237,0.3)' }}
           >
             View Projects
             <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />

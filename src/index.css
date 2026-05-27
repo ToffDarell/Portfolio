@@ -7,6 +7,7 @@
   --color-text-custom: var(--text-custom);
   --color-text-muted-custom: var(--text-muted);
   --color-primary-custom: var(--primary-custom);
+  --color-accent-custom: var(--accent-custom);
   --color-border-custom: var(--border-custom);
   
   --font-family-sans: 'Space Grotesk', sans-serif;
@@ -35,6 +36,8 @@
     --glass-border-hover: rgba(0, 0, 0, 0.15);
     --primary-custom: #2563EB;
     --primary-glow: rgba(37, 99, 235, 0.12);
+    --accent-custom: #f43f5e;
+    --accent-glow: rgba(244, 63, 94, 0.15);
     --glass-card-shadow-hover: 0 12px 32px 0 rgba(37, 99, 235, 0.08);
     --scrollbar-bg: #E2E8F0;
     --scrollbar-thumb: #CBD5E1;
@@ -42,7 +45,7 @@
   }
   
   .dark {
-    --bg-custom: #030014;
+    --bg-custom: #000000;
     --text-custom: #FFFFFF;
     --text-muted: #94A3B8;
     --surface-custom: rgba(255, 255, 255, 0.03);
@@ -53,6 +56,8 @@
     --glass-border-hover: rgba(255, 255, 255, 0.15);
     --primary-custom: #7c3aed;
     --primary-glow: rgba(124, 58, 237, 0.15);
+    --accent-custom: #f43f5e;
+    --accent-glow: rgba(244, 63, 94, 0.2);
     --glass-card-shadow-hover: 0 12px 32px 0 rgba(124, 58, 237, 0.2);
     --scrollbar-bg: #030014;
     --scrollbar-thumb: #333333;
@@ -72,12 +77,13 @@
   }
 
   ::selection {
-    background-color: rgba(124, 58, 237, 0.3);
+    background-color: var(--accent-glow);
+    color: var(--text-custom);
   }
 
   /* Accessibility focus states */
   *:focus-visible {
-    outline: 2px solid var(--primary-custom);
+    outline: 2px solid var(--accent-custom);
     outline-offset: 2px;
   }
 }
@@ -120,7 +126,7 @@
   }
   
   .dark .text-gradient {
-    background: linear-gradient(135deg, #c4b5fd, #60a5fa, #c4b5fd);
+    background: linear-gradient(135deg, #c4b5fd, #60a5fa, #f43f5e);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -139,7 +145,7 @@
   .liquid-glass-btn:hover {
     background: rgba(255, 255, 255, 0.15);
     border: 1px solid rgba(255, 255, 255, 0.3);
-    box-shadow: 0 8px 32px rgba(124, 58, 237, 0.3);
+    box-shadow: 0 8px 32px var(--accent-glow);
     transform: translateY(-2px);
   }
 
